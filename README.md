@@ -11,11 +11,6 @@ Visual Studio Code上のPlatform IOで作成したものですが、src/main.cpp
 
 `SPI.endTransaction()`と`SPI.beginTransaction()`は対で、送受信の開始・終了をします。
 
-`SPI.beginTransaction(SPISettings())`のうち`SPISettings()`はデフォルトで`SPISettings(1000000, SPI_MSBFIRST, SPI_MODE0)`となっています。第一引数はクロック周波数(Hz)、第二引数はビット順序（MSBかLSBか）、第三引数は通信モードです。SPIの通信モードは、クロック極性（クロックが動作していない状態がLOW/HIGHのどちらか）・クロック位相（送受信のタイミングが立ち上がり（LOWからHIGH）／立ち下がり（HIGHからLOW）のどちらか）に応じて0から3まであります。
-|転送モード|クロック極性|クロック位相|
-|SPI_MODE0|LOW|立ち上がり|
-|SPI_MODE1|LOW|立ち下がり|
-|SPI_MODE2|HIGH|立ち上がり|
-|SPI_MODE3|HIGH|立ち下がり|
+`SPI.beginTransaction(SPISettings())`のうち`SPISettings()`はデフォルトで`SPISettings(1000000, SPI_MSBFIRST, SPI_MODE0)`となっています。第一引数はクロック周波数(Hz)、第二引数はビット順序（MSBかLSBか）、第三引数は通信モードです。SPIの通信モードは、クロック極性・クロック位相に応じて0から3まであります。[アナログデバイセズ](https://www.analog.com/jp/analog-dialogue/articles/introduction-to-spi-interface.html)のページが詳しいです。　
 
 実際にデータを送信する関数は`SPI.transfer(data)`と`SPI.write(data)`の2種類あり、前者はMISO端子での受信データを返り値として返しますが、後者は何も返しません。また、それぞれ2バイト用の`transfer16()`/`write16()`関数や4バイト用の`transfer32()`/`write32()`関数などがあります。
